@@ -1,20 +1,20 @@
-from flask import Flask
+from flask import Flask, jsonify
+from flask_restful import Api
+from flask_cors import CORS  
+from datetime import datetime, timezone
 
 app = Flask(__name__)
+CORS(app) 
+api=Api(app)
 
-from flask_restful import Api, Resource, reqparse
+@app.route("/", methods=["GET"])
+def get_info():
+    response = {
+        "email": "teminioluwaopemipo@gmail.com",  
+        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "github_url": "https://github.com/Temake/HNG_PROJECT1",
+    }
+    return jsonify(response)
 
-todos = {}
-
-class TodoSimple(Resource):
-    def get(self, todo_id):
-        return {todo_id: todos[todo_id]}
-
-    def put(self, todo_id):
-        todos[todo_id] = request.form['data']
-        return {todo_id: todos[todo_id]}
-
-api.add_resource(TodoSimple, '/<string:todo_id>')
-
-if __name__ == '__main__':
-    app.run(debug=True)
+if __name__ == "__main__":
+    app.run(debug=True, host="0.0.0.0", port=5000)
