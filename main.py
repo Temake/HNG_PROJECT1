@@ -11,7 +11,7 @@ api=Api(app)
 def get_info():
     response = {
         "email": "teminioluwaopemipo@gmail.com",  
-        "timestamp": datetime.now(timezone.utc).isoformat(),
+        "current_datetime": datetime.now(timezone.utc).isoformat(),
         "github_url": "https://github.com/Temake/HNG_PROJECT1",
     }
     return jsonify(response)
